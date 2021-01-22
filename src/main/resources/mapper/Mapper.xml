@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.community.dao.BoardDao">
+	<select id="getBoardList" resultType="com.study.community.model.BoardModel">
+		SELECT BOARD_ID,
+			   TITLE,
+			   COALESCE(VIEW_CNT,'0') AS VIEW_CNT,
+			   COALESCE(RECO_CNT,'0') AS RECO_CNT,
+			   COALESCE(OPST_CNT,'0') AS OPST_CNT,
+			   INSERT_USER_ID,
+			   INSERT_DTM
+		  FROM STUDY.BOARD
+	  ORDER BY CAST(BOARD_ID AS SIGNED) ASC
+	</select>
+	<select id="getBoardDetail" resultType="com.study.community.model.BoardModel">
+		SELECT BOARD_ID,
+			   TITLE,
+			   CONTENT,
+			   COALESCE(VIEW_CNT,'0') AS VIEW_CNT,
+			   COALESCE(RECO_CNT,'0') AS RECO_CNT,
+			   COALESCE(OPST_CNT,'0') AS OPST_CNT,
+			   INSERT_USER_ID,
+			   INSERT_DTM
+		  FROM STUDY.BOARD
+		 WHERE BOARD_ID = #{board_id}			   
+	</select>
+	<select id="countBoardList" resultType="int">
+	    SELECT COUNT(*) FROM STUDY.BOARD;
+	</select>
+	<select id="endBoardList" resultType="string">
+		SELECT B.*
+		  FROM STUDY.BOARD B 
+	</select>
+	<update id="viewcnt">
+		UPDATE STUDY.BOARD
+		   SET VIEW_CNT = VIEW_CNT+1
+		 WHERE BOARD_ID = #{board_id}
+	</update>
+	<insert id="insert">
+		INSERT INTO STUDY.BOARD
+		(BOARD_ID, TITLE, CONTENT, INSERT_USER_ID, INSERT_DTM)
+		VALUES
+		((SELECT * FROM (SELECT MAX(CAST(BOARD_ID AS SIGNED)+1) FROM STUDY.BOARD) A ),
+		#{title}, #{content}, 'HCSHIN', SYSDATE())
+	</insert>
+	<!-- 
+	<update id="updateBoard">
+		<![CDATA[
+		UPDATE boardtest SET
+		title = #{title},
+		content = #{content}
+		WHERE idx = #{idx}
+		]]>
+	</update>
+
+	<delete id="deleteBoard">
+		<![CDATA[
+		DELETE FROM boardtest
+		WHERE idx = #{idx}
+		]]>
+	</delete>
+	 -->
+</mapper>
