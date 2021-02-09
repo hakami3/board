@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.study.community.model.BoardModel;
-import com.study.community.model.PagingVO;
 
 @Repository
 public class BoardDao {
