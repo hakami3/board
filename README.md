@@ -2,7 +2,7 @@
 
 ## 사용 기술 
 ### Framework : Spring Framework, MyBatis
-### Front-end : JSP(JSTL), HTML
+### Front-end : JSP(JSTL), HTML, Javascript
 ### Back-end : Java 
 ### DB : MySQL
 
