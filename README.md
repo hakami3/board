@@ -1,10 +1,10 @@
 # Spring Framework 기반 게시판
 
 ## 사용 기술 
-### Framework : Spring Framework
+### Framework : Spring Framework, MyBatis
 ### Front-end : JSP(JSTL), HTML
 ### Back-end : Java 
-### DB : MySQL, Mybatis
+### DB : MySQL
 
 Spring을 이용하여 MVC 패턴으로 게시판 구현
 
